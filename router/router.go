@@ -5,6 +5,7 @@ import (
 	"github.com/LucasGao67/firstgodemo/router/middleware"
 	"net/http"
 	"github.com/LucasGao67/firstgodemo/handler/sd"
+	"github.com/LucasGao67/firstgodemo/handler/user"
 )
 
 func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
@@ -23,6 +24,11 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 		svcd.GET("/disk", sd.DiskCheck)
 		svcd.GET("/cpu", sd.CPUCheck)
 		svcd.GET("/ram", sd.RAMCheck)
+	}
+
+	u := g.Group("/v1/user")
+	{
+		u.POST("",user.Create)
 	}
 
 	return g
